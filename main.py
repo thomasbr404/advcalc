@@ -55,6 +55,15 @@ def p_calc(p):
 	
 def p_expression(p):
 	'''
+	expression : expression MULTIPLY expression
+			   | expression DIVIDE expression
+			   | expression PLUS expression
+			   | expression MINUS expression
+	'''
+	p[0] = (p[2], p[1], p[3])
+
+def p_expression_int_float(p):
+	'''
 	expression : INT
 			   | FLOAT
 	'''
@@ -74,6 +83,3 @@ while True:
 	except EOFError:
 		break
 	parser.parse(s)
-
-
-
