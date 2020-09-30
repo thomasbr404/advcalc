@@ -5,7 +5,7 @@ I wanted to add a bit of a challenge to them and I felt that this was the way to
 
 Using PLY, the calculator is basically implementing a very simple language of its own that can store variables and use functions. (That's the plan at least.)
 
-Due to how PLY works (mostly yacc functionality but you know, it's PLY), it generates parsetab.py and parser.out each time main.py is run. Those files look somewhat like: (on the current build)
+Due to how PLY works (mostly yacc functionality but you know, it's PLY), it generates parsetab.py and parser.out each time main.py is run. Those files look somewhat like: 
 
 ```
 parser.out
