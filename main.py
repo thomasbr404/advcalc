@@ -12,7 +12,9 @@ tokens = [	# List of token names
 	'MINUS',
 	'DIVIDE',
 	'MULTIPLY',
-	'EQUALS'
+	'EQUALS',
+	'R_PARENTHESIS',
+	'L_PARENTHESIS'
 ]
 
 # Token definitions
@@ -22,6 +24,8 @@ t_MINUS = r'\-'
 t_DIVIDE = r'\/'
 t_MULTIPLY = r'\*'
 t_EQUALS = r'\='
+t_R_PARENTHESIS = r'\)'
+t_L_PARENTHESIS = r'\('
 
 t_ignore = r' '
 
