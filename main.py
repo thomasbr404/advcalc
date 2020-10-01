@@ -14,7 +14,8 @@ tokens = [	# List of token names
 	'MULTIPLY',
 	'EQUALS',
 	'R_PARENTHESIS',
-	'L_PARENTHESIS'
+	'L_PARENTHESIS',
+	'DELIMITER'
 ]
 
 # Token definitions
@@ -44,6 +45,9 @@ def t_NAME(t):
 	t.type = 'NAME'
 	return t
 	
+def t_DELIMITER(t):
+	r'\#'
+	
 def t_error(t):
 	print("Illegal character input!")
 	t.lexer.skip(1)
@@ -56,6 +60,7 @@ precedence = (
 )
 
 
+
 def p_calc(p):
 	'''
 	calc : expression
@@ -63,6 +68,8 @@ def p_calc(p):
 		 | empty
 	'''
 	print(run(p[1]))
+
+
 	
 def p_var_assign(p):
 	'''
@@ -93,6 +100,12 @@ def p_expression_var(p):
 	'''
 	p[0] = ('var', p[1])
 	
+def p_delimiter(p):
+	'''
+	delimiter : DELIMITER
+	'''
+	p[0] = '#'
+	
 def p_error(p):
 	print("Syntax error!")
 
@@ -101,6 +114,8 @@ def p_empty(p):
 	empty :
 	'''
 	p[0] = None
+
+
 	
 parser = yacc.yacc()
 env = {}
@@ -123,6 +138,8 @@ def run(p):
 				return 'Undeclared variable'
 			else:
 				return env[p[1]]
+		elif p[0] == '#':
+			return 'Delimiter detected'	# Not currently functioning, needs to be fixed.
 	else:
 		return p
 
