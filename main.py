@@ -20,65 +20,61 @@ tokens = [	# List of token names
 
 # Token definitions
 
-t_PLUS = r'\+'
-t_MINUS = r'\-'
-t_DIVIDE = r'\/'
-t_MULTIPLY = r'\*'
-t_EQUALS = r'\='
-t_R_PARENTHESIS = r'\)'
-t_L_PARENTHESIS = r'\('
+t_PLUS = r'\+'				# addition token - "+"
+t_MINUS = r'\-'				# subtraction token - "-"
+t_DIVIDE = r'\/'			# division token - "/"
+t_MULTIPLY = r'\*'			# multiplication token - "*"
+t_EQUALS = r'\='			# equal to token - "="
+t_R_PARENTHESIS = r'\)'		# right parenthesis token - ")"
+t_L_PARENTHESIS = r'\('		# left parenthesis token - "("
 
-t_ignore = r' '
+t_ignore = r' '				# ignore blank characters (spaces)
 
-def t_FLOAT(t):
+def t_FLOAT(t):				# float token definition as "number" + "." + "decimals"
 	r'\d+\.\d+'
 	t.value = float(t.value)
 	return t
 
-def t_INT(t):
+def t_INT(t):				# integer token definition as any number
 	r'\d+'
 	t.value = int(t.value)
 	return t
 	
-def t_NAME(t):
-	r'[a-zA-Z_][a-zA-Z_0-9]*'
+def t_NAME(t):				# variable token definition as a-z, A-Z, 0-9, _, -
+	r'[a-zA-Z_][a-zA-Z_0-9]*'	# must be an alphabetic character first
 	t.type = 'NAME'
 	return t
 	
-def t_DELIMITER(t):
+def t_DELIMITER(t):			# delimiter character set as "#" (not currently functioning.
 	r'\#'
+	t.type = 'DELIMITER'
 	
-def t_error(t):
-	print("Illegal character input!")
+def t_error(t):				# illegal character as anything outside of already defined tokens
+	print("Illegal character input")
 	t.lexer.skip(1)
 	
 lexer = lex.lex()
 
-precedence = (
+precedence = (				# must follow order of operations
 	('left', 'PLUS', 'MINUS'),
 	('left', 'MULTIPLY', 'DIVIDE')
 )
 
-
-
-def p_calc(p):
+def p_calc(p):				# carry out equation
 	'''
 	calc : expression
 		 | var_assign
 		 | empty
 	'''
 	print(run(p[1]))
-
-
 	
-def p_var_assign(p):
+def p_var_assign(p):		# assign a float/int to a variable
 	'''
 	var_assign : NAME EQUALS expression
 	'''
 	p[0] = ('=', p[1], p[3])
 
-
-def p_expression(p):
+def p_expression(p):		# define what a mathematical expression is
 	'''
 	expression : expression MULTIPLY expression
 			   | expression DIVIDE expression
@@ -104,10 +100,10 @@ def p_delimiter(p):
 	'''
 	delimiter : DELIMITER
 	'''
-	p[0] = '#'
+	p[0] = ('#')
 	
-def p_error(p):
-	print("Syntax error!")
+def p_error(p):				# return an error
+	print("Syntax error")
 
 def p_empty(p):
 	'''
@@ -119,6 +115,7 @@ def p_empty(p):
 	
 parser = yacc.yacc()
 env = {}
+
 def run(p):
 	global env
 	if type(p) == tuple:
