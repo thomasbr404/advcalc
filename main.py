@@ -4,6 +4,8 @@ import math
 import ply.lex as lex
 import ply.yacc as yacc
 
+from design.formatting import *
+
 tokens = [	# List of token names
 	'INT',
 	'FLOAT',
@@ -142,7 +144,7 @@ def run(p):
 
 while True:
 	try:
-		s = input('> ')
+		s = input(colors.fg.green + "advcalc > " + colors.reset)
 	except EOFError:
 		break
 	parser.parse(s)
