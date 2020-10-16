@@ -20,6 +20,8 @@ tokens = [	# List of token names
 	'DELIMITER'
 ]
 
+literals = [ '{', '}' ]
+
 # Token definitions
 
 t_PLUS = r'\+'				# addition token - "+"
@@ -31,6 +33,16 @@ t_R_PARENTHESIS = r'\)'		# right parenthesis token - ")"
 t_L_PARENTHESIS = r'\('		# left parenthesis token - "("
 
 t_ignore = r' '				# ignore blank characters (spaces)
+
+def t_lbrace(t):
+    r'\{'
+    t.type = '{'      # Set token type to the expected literal
+    return t
+
+def t_rbrace(t):
+    r'\}'
+    t.type = '}'      # Set token type to the expected literal
+    return t
 
 def t_FLOAT(t):				# float token definition as "number" + "." + "decimals"
 	r'\d+\.\d+'
