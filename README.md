@@ -1,7 +1,7 @@
 # advcalc
-Calculator for my hs math classes
+Calculator for learning.
 
-I wanted to add a bit of a challenge to them and I felt that this was the way to do it. Each time I move into a new unit, I will attempt to add the needed functionality before the unit is over.
+My original goals were a little far fetched, this project is probably just going to be a thing I work on occassionaly. 
 
 Using PLY, the calculator is basically implementing a very simple language of its own that can store variables and use functions. (That's the plan at least.)
 
